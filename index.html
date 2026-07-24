@@ -1,0 +1,1841 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Timor Djawa — Kopi berkualitas, racikan terbaik. Nikmati kopi pilihan dengan cita rasa autentik dari biji kopi terbaik Indonesia." />
+  <meta name="keywords" content="kopi, coffee, specialty coffee, kopi Indonesia, Timor Djawa, kafe, coffee shop" />
+  <meta name="author" content="Timor Djawa" />
+  <title>Timor Djawa — Kopi Berkualitas, Racikan Terbaik</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#4B2E2B',
+            cream: '#F8F5F2',
+            gold: '#C89B5E',
+            dark: '#2D2D2D',
+            light: '#FFFFFF',
+          },
+          fontFamily: {
+            heading: ['Playfair Display', 'Georgia', 'serif'],
+            body: ['Poppins', 'system-ui', 'sans-serif'],
+          },
+          borderRadius: {
+            '2xl': '1rem',
+            '3xl': '1.5rem',
+          },
+        },
+      },
+    };
+  </script>
+
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <style>
+    /* === Base === */
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Poppins', system-ui, sans-serif;
+      color: #2D2D2D;
+      background: #FFFFFF;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    /* === Scroll Animations === */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .fade-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .fade-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* === Navbar transition === */
+    .navbar-scrolled {
+      background: rgba(255, 255, 255, 0.97) !important;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08) !important;
+      backdrop-filter: blur(12px);
+    }
+
+    /* === Image zoom on hover === */
+    .img-zoom {
+      overflow: hidden;
+      border-radius: 1rem;
+    }
+    .img-zoom img {
+      transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .img-zoom:hover img {
+      transform: scale(1.08);
+    }
+
+    /* === Button hover === */
+    .btn-primary {
+      background: #4B2E2B;
+      color: #fff;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .btn-primary:hover {
+      background: #3a2220;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(75, 46, 43, 0.3);
+    }
+    .btn-secondary {
+      border: 2px solid #4B2E2B;
+      color: #4B2E2B;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .btn-secondary:hover {
+      background: #4B2E2B;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .btn-gold {
+      background: #C89B5E;
+      color: #fff;
+      transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .btn-gold:hover {
+      background: #b8893e;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(200, 155, 94, 0.35);
+    }
+
+    /* === Menu Card === */
+    .menu-card {
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .menu-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    }
+
+    /* === Category filter active === */
+    .cat-btn.active {
+      background: #4B2E2B;
+      color: #fff;
+    }
+
+    /* === FAQ Accordion === */
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1), padding 0.3s ease;
+    }
+    .faq-answer.open {
+      max-height: 500px;
+    }
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+    .faq-icon.open {
+      transform: rotate(45deg);
+    }
+
+    /* === Back to top === */
+    .back-to-top {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      transform: translateY(10px);
+    }
+    .back-to-top.show {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* === Custom scrollbar === */
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #F8F5F2; }
+    ::-webkit-scrollbar-thumb { background: #C89B5E; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #4B2E2B; }
+
+    /* === Cart badge pulse === */
+    @keyframes pulse-badge {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+    }
+    .cart-badge-pulse {
+      animation: pulse-badge 0.4s ease;
+    }
+
+    /* === Star rating === */
+    .star-filled { color: #C89B5E; }
+
+    /* === Mobile menu === */
+    .mobile-menu {
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .mobile-menu.open {
+      transform: translateX(0);
+    }
+
+    /* === Gallery masonry-like === */
+    .gallery-item {
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .gallery-item:hover {
+      transform: scale(1.03);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    }
+    .gallery-overlay {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .gallery-item:hover .gallery-overlay {
+      opacity: 1;
+    }
+
+    /* === Hero parallax === */
+    .hero-bg {
+      transition: transform 0.1s linear;
+    }
+
+    /* === Quantity controls === */
+    .qty-btn {
+      transition: all 0.2s ease;
+    }
+    .qty-btn:hover {
+      background: #4B2E2B;
+      color: #fff;
+    }
+
+    /* === Section divider === */
+    .section-divider {
+      width: 60px;
+      height: 3px;
+      background: #C89B5E;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+
+<body class="antialiased">
+
+  <!-- ============================================ -->
+  <!-- 1. STICKY NAVIGATION                         -->
+  <!-- ============================================ -->
+  <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background: transparent;">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20">
+        <!-- Logo -->
+        <a href="#beranda" class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+            <span class="text-white font-heading font-bold text-lg">T</span>
+          </div>
+          <span class="font-heading text-xl font-semibold text-primary navbar-logo-text">Timor Djawa</span>
+        </a>
+
+        <!-- Desktop Nav Links -->
+        <div class="hidden lg:flex items-center gap-8">
+          <a href="#beranda" class="text-sm font-medium text-dark hover:text-primary transition-colors duration-300">Beranda</a>
+          <a href="#tentang" class="text-sm font-medium text-dark hover:text-primary transition-colors duration-300">Tentang</a>
+          <a href="#menu" class="text-sm font-medium text-dark hover:text-primary transition-colors duration-300">Menu</a>
+          <a href="#order" class="text-sm font-medium text-dark hover:text-primary transition-colors duration-300">Order</a>
+          <a href="#galeri" class="text-sm font-medium text-dark hover:text-primary transition-colors duration-300">Galeri</a>
+          <a href="#testimoni" class="text-sm font-medium text-dark hover:text-primary transition-colors duration-300">Testimoni</a>
+          <a href="#faq" class="text-sm font-medium text-dark hover:text-primary transition-colors duration-300">FAQ</a>
+          <a href="#kontak" class="text-sm font-medium text-dark hover:text-primary transition-colors duration-300">Kontak</a>
+        </div>
+
+        <!-- CTA + Cart + Hamburger -->
+        <div class="flex items-center gap-4">
+          <!-- Cart Icon (Desktop) -->
+          <button id="cartToggleDesktop" class="hidden lg:flex relative items-center justify-center w-10 h-10 rounded-full hover:bg-cream transition-colors" aria-label="Keranjang">
+            <i data-lucide="shopping-bag" class="w-5 h-5 text-primary"></i>
+            <span id="cartCountDesktop" class="absolute -top-1 -right-1 w-5 h-5 bg-gold text-white text-xs font-bold rounded-full flex items-center justify-center hidden">0</span>
+          </button>
+          <!-- CTA Button (Desktop) -->
+          <a href="#order" class="hidden lg:inline-flex btn-primary px-6 py-2.5 rounded-full text-sm font-medium">Pesan Sekarang</a>
+          <!-- Hamburger -->
+          <button id="mobileMenuBtn" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+            <span class="block w-6 h-0.5 bg-primary transition-all duration-300 hamburger-line"></span>
+            <span class="block w-6 h-0.5 bg-primary transition-all duration-300 hamburger-line"></span>
+            <span class="block w-4 h-0.5 bg-primary transition-all duration-300 hamburger-line"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div id="mobileMenu" class="mobile-menu fixed inset-0 z-[60] bg-white flex flex-col">
+    <div class="flex items-center justify-between px-4 h-20">
+      <a href="#beranda" class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center">
+          <span class="text-white font-heading font-bold text-lg">T</span>
+        </div>
+        <span class="font-heading text-xl font-semibold text-primary">Timor Djawa</span>
+      </a>
+      <button id="mobileMenuClose" class="p-2" aria-label="Tutup menu">
+        <i data-lucide="x" class="w-6 h-6 text-primary"></i>
+      </button>
+    </div>
+    <div class="flex-1 flex flex-col items-center justify-center gap-6">
+      <a href="#beranda" class="mobile-nav-link text-2xl font-heading text-dark hover:text-primary transition-colors">Beranda</a>
+      <a href="#tentang" class="mobile-nav-link text-2xl font-heading text-dark hover:text-primary transition-colors">Tentang</a>
+      <a href="#menu" class="mobile-nav-link text-2xl font-heading text-dark hover:text-primary transition-colors">Menu</a>
+      <a href="#order" class="mobile-nav-link text-2xl font-heading text-dark hover:text-primary transition-colors">Order</a>
+      <a href="#galeri" class="mobile-nav-link text-2xl font-heading text-dark hover:text-primary transition-colors">Galeri</a>
+      <a href="#testimoni" class="mobile-nav-link text-2xl font-heading text-dark hover:text-primary transition-colors">Testimoni</a>
+      <a href="#faq" class="mobile-nav-link text-2xl font-heading text-dark hover:text-primary transition-colors">FAQ</a>
+      <a href="#kontak" class="mobile-nav-link text-2xl font-heading text-dark hover:text-primary transition-colors">Kontak</a>
+      <div class="mt-4 flex flex-col items-center gap-3">
+        <a href="#order" class="btn-primary px-8 py-3 rounded-full text-base font-medium mobile-nav-link">Pesan Sekarang</a>
+        <button id="cartToggleMobile" class="relative flex items-center gap-2 text-primary font-medium mobile-nav-link">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          Keranjang
+          <span id="cartCountMobile" class="w-5 h-5 bg-gold text-white text-xs font-bold rounded-full flex items-center justify-center hidden">0</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- CART SIDEBAR                                 -->
+  <!-- ============================================ -->
+  <div id="cartOverlay" class="fixed inset-0 bg-black/40 z-[70] hidden opacity-0 transition-opacity duration-300"></div>
+  <aside id="cartSidebar" class="fixed top-0 right-0 h-full w-full sm:w-[420px] bg-white z-[80] shadow-2xl transform translate-x-full transition-transform duration-400 ease-[cubic-bezier(0.22,1,0.36,1)] flex flex-col">
+    <!-- Cart Header -->
+    <div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+      <h3 class="font-heading text-xl font-semibold text-primary">Keranjang Anda</h3>
+      <button id="cartClose" class="p-1 hover:bg-cream rounded-full transition-colors" aria-label="Tutup keranjang">
+        <i data-lucide="x" class="w-5 h-5 text-primary"></i>
+      </button>
+    </div>
+    <!-- Cart Items -->
+    <div id="cartItems" class="flex-1 overflow-y-auto px-6 py-4">
+      <div id="cartEmpty" class="flex flex-col items-center justify-center h-full text-center">
+        <i data-lucide="shopping-bag" class="w-16 h-16 text-gray-200 mb-4"></i>
+        <p class="text-gray-400 font-medium">Keranjang masih kosong</p>
+        <p class="text-gray-300 text-sm mt-1">Tambahkan menu favorit Anda</p>
+      </div>
+      <div id="cartList" class="space-y-4 hidden"></div>
+    </div>
+    <!-- Cart Footer -->
+    <div id="cartFooter" class="hidden border-t border-gray-100 px-6 py-5">
+      <div class="flex justify-between items-center mb-4">
+        <span class="text-dark font-medium">Total</span>
+        <span id="cartTotal" class="text-xl font-heading font-bold text-primary">Rp 0</span>
+      </div>
+      <a href="#order" id="cartCheckoutBtn" class="btn-primary w-full py-3 rounded-full text-center block font-medium">Lanjut ke Pemesanan</a>
+    </div>
+  </aside>
+
+  <!-- ============================================ -->
+  <!-- 2. HERO SECTION                              -->
+  <!-- ============================================ -->
+  <section id="beranda" class="relative min-h-screen flex items-center overflow-hidden">
+    <!-- Background Image -->
+    <div class="absolute inset-0 hero-bg">
+      <img
+        src="https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=1920&h=1080&fit=crop&q=80"
+        alt="Biji kopi premium"
+        class="w-full h-full object-cover"
+        loading="eager"
+      />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-black/40 to-transparent"></div>
+    </div>
+    <!-- Content -->
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 lg:py-0">
+      <div class="max-w-2xl">
+        <p class="text-gold font-medium tracking-widest uppercase text-sm mb-4 fade-up" style="transition-delay: 0.1s;">Specialty Coffee dari Indonesia</p>
+        <h1 class="font-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-white leading-tight mb-6 fade-up" style="transition-delay: 0.2s;">
+          Kopi Berkualitas, Racikan Terbaik.
+        </h1>
+        <p class="text-white/80 text-lg sm:text-xl leading-relaxed mb-10 max-w-lg fade-up" style="transition-delay: 0.35s;">
+          Nikmati kopi pilihan dengan cita rasa autentik yang dibuat dari biji kopi terbaik Indonesia.
+        </p>
+        <div class="flex flex-wrap gap-4 fade-up" style="transition-delay: 0.5s;">
+          <a href="#order" class="btn-gold px-8 py-3.5 rounded-full font-medium text-base inline-flex items-center gap-2">
+            Pesan Sekarang
+            <i data-lucide="arrow-right" class="w-5 h-5"></i>
+          </a>
+          <a href="#menu" class="btn-secondary border-white/40 text-white hover:bg-white hover:text-primary px-8 py-3.5 rounded-full font-medium text-base inline-flex items-center gap-2">
+            Lihat Menu
+            <i data-lucide="coffee" class="w-5 h-5"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+      <i data-lucide="chevron-down" class="w-6 h-6 text-white/60"></i>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 3. ABOUT SECTION                             -->
+  <!-- ============================================ -->
+  <section id="tentang" class="py-20 lg:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <!-- Image -->
+        <div class="fade-left">
+          <div class="img-zoom rounded-3xl shadow-2xl">
+            <img
+              src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=600&fit=crop&q=80"
+              alt="Suasana kafe Timor Djawa"
+              class="w-full h-[400px] lg:h-[500px] object-cover rounded-3xl"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        <!-- Text -->
+        <div class="fade-right">
+          <p class="text-gold font-medium tracking-widest uppercase text-sm mb-3">Tentang Kami</p>
+          <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary leading-tight mb-6">
+            Cerita di Balik<br />Setiap Cangkir
+          </h2>
+          <div class="section-divider mb-8"></div>
+          <p class="text-dark/70 leading-relaxed mb-6">
+            <strong class="text-dark">Timor Djawa</strong> lahir dari kecintaan mendalam terhadap kopi Indonesia. Kami percaya bahwa setiap cangkir kopi memiliki cerita — mulai dari petani yang merawat pohon kopi di pegunungan, hingga barista yang meraciknya dengan penuh dedikasi. Nama kami terinspirasi dari Pulau Timor, salah satu wilayah penghasil kopi terbaik di Nusantara.
+          </p>
+          <p class="text-dark/70 leading-relaxed mb-8">
+            Kami berkomitmen untuk hanya menggunakan biji kopi pilihan dari petani lokal Indonesia, dipanggang dengan presisi tinggi, dan disajikan oleh barista profesional yang memahami seni dan sains di balik setiap racikan. Kualitas bukan sekadar janji, melainkan standar yang kami pegang teguh di setiap sajian.
+          </p>
+          <div class="grid grid-cols-2 gap-6">
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-cream flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="leaf" class="w-5 h-5 text-gold"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-dark text-sm">Biji Kopi Pilihan</h4>
+                <p class="text-dark/50 text-xs mt-1">Dari petani lokal terbaik</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-cream flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="flame" class="w-5 h-5 text-gold"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-dark text-sm">Fresh Roasted</h4>
+                <p class="text-dark/50 text-xs mt-1">Dipanggang segar setiap hari</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-cream flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="heart" class="w-5 h-5 text-gold"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-dark text-sm">Pelayanan Terbaik</h4>
+                <p class="text-dark/50 text-xs mt-1">Dengan sepenuh hati</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-3">
+              <div class="w-10 h-10 rounded-xl bg-cream flex items-center justify-center flex-shrink-0 mt-0.5">
+                <i data-lucide="award" class="w-5 h-5 text-gold"></i>
+              </div>
+              <div>
+                <h4 class="font-semibold text-dark text-sm">Kualitas Premium</h4>
+                <p class="text-dark/50 text-xs mt-1">Standar specialty grade</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 4. FEATURED MENU SECTION                     -->
+  <!-- ============================================ -->
+  <section id="menu" class="py-20 lg:py-32 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-12 fade-up">
+        <p class="text-gold font-medium tracking-widest uppercase text-sm mb-3">Menu Kami</p>
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary leading-tight mb-4">
+          Jelajahi Pilihan Menu
+        </h2>
+        <div class="section-divider mx-auto mb-6"></div>
+        <p class="text-dark/60 leading-relaxed">
+          Temukan beragam pilihan kopi, minuman, dan makanan yang diracik dengan bahan-bahan berkualitas premium untuk pengalaman bersantap terbaik Anda.
+        </p>
+      </div>
+
+      <!-- Category Filter -->
+      <div class="flex flex-wrap justify-center gap-3 mb-12 fade-up" style="transition-delay: 0.1s;">
+        <button class="cat-btn active px-6 py-2.5 rounded-full text-sm font-medium border border-primary/20 bg-white text-dark transition-all duration-300 hover:border-primary hover:text-primary" data-category="semua">Semua</button>
+        <button class="cat-btn px-6 py-2.5 rounded-full text-sm font-medium border border-primary/20 bg-white text-dark transition-all duration-300 hover:border-primary hover:text-primary" data-category="coffee">Coffee</button>
+        <button class="cat-btn px-6 py-2.5 rounded-full text-sm font-medium border border-primary/20 bg-white text-dark transition-all duration-300 hover:border-primary hover:text-primary" data-category="non-coffee">Non Coffee</button>
+        <button class="cat-btn px-6 py-2.5 rounded-full text-sm font-medium border border-primary/20 bg-white text-dark transition-all duration-300 hover:border-primary hover:text-primary" data-category="tea">Tea</button>
+        <button class="cat-btn px-6 py-2.5 rounded-full text-sm font-medium border border-primary/20 bg-white text-dark transition-all duration-300 hover:border-primary hover:text-primary" data-category="signature">Signature</button>
+        <button class="cat-btn px-6 py-2.5 rounded-full text-sm font-medium border border-primary/20 bg-white text-dark transition-all duration-300 hover:border-primary hover:text-primary" data-category="dessert">Dessert</button>
+        <button class="cat-btn px-6 py-2.5 rounded-full text-sm font-medium border border-primary/20 bg-white text-dark transition-all duration-300 hover:border-primary hover:text-primary" data-category="snack">Snack</button>
+      </div>
+
+      <!-- Menu Grid -->
+      <div id="menuGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+        <!-- Menu items will be rendered by JavaScript -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 5. BEST SELLER SECTION                       -->
+  <!-- ============================================ -->
+  <section id="best-seller" class="py-20 lg:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+        <p class="text-gold font-medium tracking-widest uppercase text-sm mb-3">Favorit Pelanggan</p>
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary leading-tight mb-4">
+          Best Seller
+        </h2>
+        <div class="section-divider mx-auto mb-6"></div>
+        <p class="text-dark/60 leading-relaxed">
+          Menu yang paling digemari oleh pelanggan setia Timor Djawa. Racikan istimewa yang selalu jadi pilihan utama.
+        </p>
+      </div>
+
+      <!-- Best Seller Cards -->
+      <div class="grid md:grid-cols-3 gap-8">
+        <!-- Best Seller 1 -->
+        <div class="menu-card bg-cream rounded-3xl overflow-hidden fade-up" style="transition-delay: 0.1s;">
+          <div class="img-zoom">
+            <img src="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=600&h=400&fit=crop&q=80" alt="Espresso Timor" class="w-full h-56 object-cover" loading="lazy" />
+          </div>
+          <div class="p-6">
+            <span class="inline-block px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-medium mb-3">Best Seller #1</span>
+            <h3 class="font-heading text-xl font-bold text-primary mb-2">Espresso Timor</h3>
+            <p class="text-dark/60 text-sm leading-relaxed mb-4">Espresso premium dari biji kopi Timor yang dipanggang medium-dark dengan karakter rasa earthy, cokelat, dan sedikit fruity notes yang khas.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-heading text-2xl font-bold text-primary">Rp 32.000</span>
+              <button class="btn-primary px-5 py-2.5 rounded-full text-sm font-medium add-to-cart-btn" data-name="Espresso Timor" data-price="32000" data-img="https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=600&h=400&fit=crop&q=80">
+                <i data-lucide="plus" class="w-4 h-4 inline"></i> Pesan
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Best Seller 2 -->
+        <div class="menu-card bg-cream rounded-3xl overflow-hidden fade-up" style="transition-delay: 0.2s;">
+          <div class="img-zoom">
+            <img src="https://images.unsplash.com/photo-1534778101976-62847782c213?w=600&h=400&fit=crop&q=80" alt="Caramel Macchiato" class="w-full h-56 object-cover" loading="lazy" />
+          </div>
+          <div class="p-6">
+            <span class="inline-block px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-medium mb-3">Best Seller #2</span>
+            <h3 class="font-heading text-xl font-bold text-primary mb-2">Caramel Macchiato</h3>
+            <p class="text-dark/60 text-sm leading-relaxed mb-4">Perpaduan sempurna espresso, susu steamed, vanilla syrup, dan caramel drizzle yang menciptakan keseimbangan manis dan pahit yang memanjakan lidah.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-heading text-2xl font-bold text-primary">Rp 45.000</span>
+              <button class="btn-primary px-5 py-2.5 rounded-full text-sm font-medium add-to-cart-btn" data-name="Caramel Macchiato" data-price="45000" data-img="https://images.unsplash.com/photo-1534778101976-62847782c213?w=600&h=400&fit=crop&q=80">
+                <i data-lucide="plus" class="w-4 h-4 inline"></i> Pesan
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Best Seller 3 -->
+        <div class="menu-card bg-cream rounded-3xl overflow-hidden fade-up" style="transition-delay: 0.3s;">
+          <div class="img-zoom">
+            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&h=400&fit=crop&q=80" alt="Kopi Susu Gula Aren" class="w-full h-56 object-cover" loading="lazy" />
+          </div>
+          <div class="p-6">
+            <span class="inline-block px-3 py-1 rounded-full bg-gold/10 text-gold text-xs font-medium mb-3">Best Seller #3</span>
+            <h3 class="font-heading text-xl font-bold text-primary mb-2">Kopi Susu Gula Aren</h3>
+            <p class="text-dark/60 text-sm leading-relaxed mb-4">Racikan khas nusantara yang menggabungkan espresso, fresh milk, dan gula aren asli. Manis alami yang menghangatkan dan menjadi favorit sepanjang masa.</p>
+            <div class="flex items-center justify-between">
+              <span class="font-heading text-2xl font-bold text-primary">Rp 38.000</span>
+              <button class="btn-primary px-5 py-2.5 rounded-full text-sm font-medium add-to-cart-btn" data-name="Kopi Susu Gula Aren" data-price="38000" data-img="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=600&h=400&fit=crop&q=80">
+                <i data-lucide="plus" class="w-4 h-4 inline"></i> Pesan
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 6. ORDERING SECTION                          -->
+  <!-- ============================================ -->
+  <section id="order" class="py-20 lg:py-32 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section Header -->
+      <div class="text-center max-w-2xl mx-auto mb-12 fade-up">
+        <p class="text-gold font-medium tracking-widest uppercase text-sm mb-3">Pesan Online</p>
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary leading-tight mb-4">
+          Pesan dengan Mudah
+        </h2>
+        <div class="section-divider mx-auto mb-6"></div>
+        <p class="text-dark/60 leading-relaxed">
+          Pilih menu favorit Anda, atur jumlah pesanan, dan selesaikan pemesanan dalam beberapa langkah mudah.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-3 gap-8">
+        <!-- Menu List for Order -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- Search & Filter -->
+          <div class="bg-white rounded-2xl p-4 sm:p-6 shadow-sm fade-up">
+            <div class="flex flex-col sm:flex-row gap-4">
+              <div class="relative flex-1">
+                <i data-lucide="search" class="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-300"></i>
+                <input type="text" id="orderSearch" placeholder="Cari menu..." class="w-full pl-12 pr-4 py-3 rounded-xl border border-gray-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all text-sm" />
+              </div>
+              <select id="orderCategoryFilter" class="px-4 py-3 rounded-xl border border-gray-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all text-sm bg-white cursor-pointer">
+                <option value="semua">Semua Kategori</option>
+                <option value="coffee">Coffee</option>
+                <option value="non-coffee">Non Coffee</option>
+                <option value="tea">Tea</option>
+                <option value="signature">Signature</option>
+                <option value="dessert">Dessert</option>
+                <option value="snack">Snack</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Order Menu Grid -->
+          <div id="orderMenuGrid" class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Order Summary Sidebar -->
+        <div class="lg:col-span-1">
+          <div class="bg-white rounded-2xl p-6 shadow-sm sticky top-24 fade-up">
+            <h3 class="font-heading text-xl font-bold text-primary mb-6">Ringkasan Pesanan</h3>
+
+            <!-- Order Items -->
+            <div id="orderSummaryItems" class="space-y-3 mb-6 max-h-60 overflow-y-auto">
+              <p id="orderEmptyMsg" class="text-gray-300 text-sm text-center py-4">Belum ada item</p>
+            </div>
+
+            <div class="border-t border-gray-100 pt-4 space-y-3">
+              <!-- Promo Code -->
+              <div class="flex gap-2">
+                <input type="text" id="promoCode" placeholder="Kode promo" class="flex-1 px-4 py-2.5 rounded-xl border border-gray-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all text-sm" />
+                <button id="applyPromo" class="px-4 py-2.5 rounded-xl border-2 border-primary text-primary text-sm font-medium hover:bg-primary hover:text-white transition-all">Gunakan</button>
+              </div>
+
+              <!-- Delivery Option -->
+              <div class="space-y-2">
+                <p class="text-sm font-medium text-dark">Metode Pesan:</p>
+                <label class="flex items-center gap-3 p-3 rounded-xl border border-gray-200 cursor-pointer hover:border-gold transition-colors has-[:checked]:border-primary has-[:checked]:bg-cream">
+                  <input type="radio" name="delivery" value="pickup" checked class="accent-primary" />
+                  <div>
+                    <span class="text-sm font-medium text-dark">Ambil Sendiri (Pick Up)</span>
+                    <p class="text-xs text-dark/50">Ambil pesanan di toko</p>
+                  </div>
+                </label>
+                <label class="flex items-center gap-3 p-3 rounded-xl border border-gray-200 cursor-pointer hover:border-gold transition-colors has-[:checked]:border-primary has-[:checked]:bg-cream">
+                  <input type="radio" name="delivery" value="delivery" class="accent-primary" />
+                  <div>
+                    <span class="text-sm font-medium text-dark">Delivery</span>
+                    <p class="text-xs text-dark/50">Diantar ke lokasi Anda</p>
+                  </div>
+                </label>
+              </div>
+
+              <!-- Customer Notes -->
+              <div>
+                <label class="text-sm font-medium text-dark block mb-2">Catatan:</label>
+                <textarea id="customerNotes" rows="2" placeholder="Contoh: Less sugar, extra shot..." class="w-full px-4 py-2.5 rounded-xl border border-gray-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all text-sm resize-none"></textarea>
+              </div>
+
+              <!-- Price Summary -->
+              <div class="space-y-2 pt-2">
+                <div class="flex justify-between text-sm">
+                  <span class="text-dark/60">Subtotal</span>
+                  <span id="orderSubtotal" class="text-dark font-medium">Rp 0</span>
+                </div>
+                <div class="flex justify-between text-sm">
+                  <span class="text-dark/60">Pajak (10%)</span>
+                  <span id="orderTax" class="text-dark font-medium">Rp 0</span>
+                </div>
+                <div id="discountRow" class="hidden flex justify-between text-sm">
+                  <span class="text-green-600">Diskon</span>
+                  <span id="orderDiscount" class="text-green-600 font-medium">-Rp 0</span>
+                </div>
+                <div class="border-t border-gray-100 pt-3 flex justify-between">
+                  <span class="text-dark font-semibold">Total</span>
+                  <span id="orderTotal" class="text-xl font-heading font-bold text-primary">Rp 0</span>
+                </div>
+              </div>
+
+              <!-- Checkout Button -->
+              <button id="checkoutBtn" class="btn-gold w-full py-3.5 rounded-full font-medium text-base mt-2 flex items-center justify-center gap-2">
+                <i data-lucide="credit-card" class="w-5 h-5"></i>
+                Checkout Sekarang
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 7. WHY CHOOSE US                             -->
+  <!-- ============================================ -->
+  <section id="keunggulan" class="py-20 lg:py-32 bg-primary">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-16 fade-up">
+        <p class="text-gold font-medium tracking-widest uppercase text-sm mb-3">Keunggulan Kami</p>
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4">
+          Mengapa Memilih Kami?
+        </h2>
+        <div class="section-divider mx-auto mb-6"></div>
+        <p class="text-white/60 leading-relaxed">
+          Kami berkomitmen memberikan pengalaman kopi terbaik dengan standar kualitas tertinggi di setiap aspek pelayanan.
+        </p>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <!-- Feature 1 -->
+        <div class="text-center group fade-up" style="transition-delay: 0.1s;">
+          <div class="w-20 h-20 rounded-2xl bg-white/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-gold/20 transition-colors duration-300">
+            <i data-lucide="bean" class="w-10 h-10 text-gold"></i>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-white mb-3">Biji Kopi Pilihan</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Hanya biji kopi grade specialty dari petani terbaik Indonesia yang kami gunakan untuk setiap racikan.</p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="text-center group fade-up" style="transition-delay: 0.2s;">
+          <div class="w-20 h-20 rounded-2xl bg-white/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-gold/20 transition-colors duration-300">
+            <i data-lucide="chef-hat" class="w-10 h-10 text-gold"></i>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-white mb-3">Barista Profesional</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Tim barista bersertifikat SCA yang berpengalaman dan berdedikasi tinggi dalam seni meracik kopi.</p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="text-center group fade-up" style="transition-delay: 0.3s;">
+          <div class="w-20 h-20 rounded-2xl bg-white/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-gold/20 transition-colors duration-300">
+            <i data-lucide="sprout" class="w-10 h-10 text-gold"></i>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-white mb-3">Bahan Segar</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Semua bahan dipilih segar setiap hari untuk memastikan kualitas rasa yang konsisten dan terjaga.</p>
+        </div>
+        <!-- Feature 4 -->
+        <div class="text-center group fade-up" style="transition-delay: 0.4s;">
+          <div class="w-20 h-20 rounded-2xl bg-white/10 flex items-center justify-center mx-auto mb-6 group-hover:bg-gold/20 transition-colors duration-300">
+            <i data-lucide="zap" class="w-10 h-10 text-gold"></i>
+          </div>
+          <h3 class="font-heading text-xl font-bold text-white mb-3">Pelayanan Cepat</h3>
+          <p class="text-white/50 text-sm leading-relaxed">Efisiensi tanpa mengorbankan kualitas. Pesanan Anda disiapkan dengan cepat dan akurat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 8. GALLERY SECTION                           -->
+  <!-- ============================================ -->
+  <section id="galeri" class="py-20 lg:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12 fade-up">
+        <p class="text-gold font-medium tracking-widest uppercase text-sm mb-3">Galeri</p>
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary leading-tight mb-4">
+          Suasana Timor Djawa
+        </h2>
+        <div class="section-divider mx-auto mb-6"></div>
+        <p class="text-dark/60 leading-relaxed">
+          Intip suasana dan momen-momen indah di kafe kami. Setiap sudut dirancang untuk memberikan kenyamanan dan inspirasi.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="gallery-item relative rounded-2xl overflow-hidden col-span-2 row-span-2 img-zoom fade-up" style="transition-delay:0.1s">
+          <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&h=800&fit=crop&q=80" alt="Interior kafe" class="w-full h-full object-cover" loading="lazy" />
+          <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-6">
+            <span class="text-white font-medium text-sm">Interior Kafe</span>
+          </div>
+        </div>
+        <div class="gallery-item relative rounded-2xl overflow-hidden img-zoom fade-up" style="transition-delay:0.15s">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=400&h=400&fit=crop&q=80" alt="Latte art" class="w-full h-48 object-cover" loading="lazy" />
+          <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
+            <span class="text-white font-medium text-sm">Latte Art</span>
+          </div>
+        </div>
+        <div class="gallery-item relative rounded-2xl overflow-hidden img-zoom fade-up" style="transition-delay:0.2s">
+          <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=400&h=400&fit=crop&q=80" alt="Kopi dan buku" class="w-full h-48 object-cover" loading="lazy" />
+          <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
+            <span class="text-white font-medium text-sm">Waktu Teduh</span>
+          </div>
+        </div>
+        <div class="gallery-item relative rounded-2xl overflow-hidden img-zoom fade-up" style="transition-delay:0.25s">
+          <img src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=400&h=400&fit=crop&q=80" alt="Biji kopi" class="w-full h-48 object-cover" loading="lazy" />
+          <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
+            <span class="text-white font-medium text-sm">Biji Kopi</span>
+          </div>
+        </div>
+        <div class="gallery-item relative rounded-2xl overflow-hidden img-zoom fade-up" style="transition-delay:0.3s">
+          <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307?w=400&h=400&fit=crop&q=80" alt="Dessert" class="w-full h-48 object-cover" loading="lazy" />
+          <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
+            <span class="text-white font-medium text-sm">Dessert Premium</span>
+          </div>
+        </div>
+        <div class="gallery-item relative rounded-2xl overflow-hidden img-zoom fade-up" style="transition-delay:0.35s">
+          <img src="https://images.unsplash.com/photo-1524350876685-274059332603?w=400&h=400&fit=crop&q=80" alt="Kebun kopi" class="w-full h-48 object-cover" loading="lazy" />
+          <div class="gallery-overlay absolute inset-0 bg-gradient-to-t from-black/50 to-transparent flex items-end p-4">
+            <span class="text-white font-medium text-sm">Kebun Kopi</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 9. TESTIMONIALS SECTION                      -->
+  <!-- ============================================ -->
+  <section id="testimoni" class="py-20 lg:py-32 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12 fade-up">
+        <p class="text-gold font-medium tracking-widest uppercase text-sm mb-3">Testimoni</p>
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary leading-tight mb-4">
+          Kata Mereka tentang Kami
+        </h2>
+        <div class="section-divider mx-auto mb-6"></div>
+        <p class="text-dark/60 leading-relaxed">
+          Kepuasan pelanggan adalah prioritas utama kami. Berikut ulasan dari pelanggan setia Timor Djawa.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Testimonial 1 -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 fade-up" style="transition-delay: 0.1s;">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+          </div>
+          <p class="text-dark/70 text-sm leading-relaxed mb-6 italic">"Kopi terenak yang pernah saya coba! Espresso Timor punya karakter rasa yang sangat unik dan berbeda dari kopi lainnya. Suasana kafenya juga sangat nyaman untuk bekerja atau bersantai."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-cream flex items-center justify-center">
+              <span class="font-heading font-bold text-primary">AR</span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-dark text-sm">Andi Raharjo</h4>
+              <p class="text-dark/40 text-xs">Pengusaha</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 fade-up" style="transition-delay: 0.2s;">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+          </div>
+          <p class="text-dark/70 text-sm leading-relaxed mb-6 italic">"Caramel Macchiato di sini juara! Manisnya pas, tidak berlebihan. Pelayanannya juga sangat ramah dan profesional. Saya jadi langganan setiap hari libur."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-cream flex items-center justify-center">
+              <span class="font-heading font-bold text-primary">SP</span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-dark text-sm">Sari Purnama</h4>
+              <p class="text-dark/40 text-xs">Desainer Grafis</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 fade-up" style="transition-delay: 0.3s;">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 text-gray-200"></i>
+          </div>
+          <p class="text-dark/70 text-sm leading-relaxed mb-6 italic">"Tempat yang sempurna untuk meeting klien. WiFi cepat, kopi nikmat, dan makanannya juga enak. Kopi Susu Gula Aren jadi wajib order setiap kali berkunjung."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-cream flex items-center justify-center">
+              <span class="font-heading font-bold text-primary">BW</span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-dark text-sm">Budi Wicaksono</h4>
+              <p class="text-dark/40 text-xs">Product Manager</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 fade-up" style="transition-delay: 0.15s;">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+          </div>
+          <p class="text-dark/70 text-sm leading-relaxed mb-6 italic">"Matcha Latte-nya luar biasa! Rasa matcha-nya authentic dan tidak terlalu manis. Ditambah dessert-nya juga memikat. Pasti akan kembali lagi bersama teman-teman."</p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-cream flex items-center justify-center">
+              <span class="font-heading font-bold text-primary">DA</span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-dark text-sm">Dian Ayu</h4>
+              <p class="text-dark/40 text-xs">Content Creator</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 5 -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 fade-up" style="transition-delay: 0.25s;">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+          </div>
+          <p class="text-dark/70 text-sm leading-relaxed mb-6 italic">"Sebagai coffee lover, saya sangat mengapresiasi kualitas kopi di Timor Djawa. Mereka benar-benar memahami cara menyajikan kopi specialty yang autentik. Highly recommended!"</p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-cream flex items-center justify-center">
+              <span class="font-heading font-bold text-primary">RH</span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-dark text-sm">Rizky Hidayat</h4>
+              <p class="text-dark/40 text-xs">Barista</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 6 -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 fade-up" style="transition-delay: 0.35s;">
+          <div class="flex items-center gap-1 mb-4">
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+            <i data-lucide="star" class="w-4 h-4 fill-gold text-gold"></i>
+          </div>
+          <p class="text-dark/70 text-sm leading-relaxed mb-6 italic">"Tiramisu-nya juara banget! Paduan kopi dan creamy-nya pas. Tempatnya juga instagrammable, cocok buat hangout bareng teman-teman. Love it!"</p>
+          <div class="flex items-center gap-4">
+            <div class="w-12 h-12 rounded-full bg-cream flex items-center justify-center">
+              <span class="font-heading font-bold text-primary">MN</span>
+            </div>
+            <div>
+              <h4 class="font-semibold text-dark text-sm">Maya Nurhaliza</h4>
+              <p class="text-dark/40 text-xs">Mahasiswa</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 10. FAQ SECTION                              -->
+  <!-- ============================================ -->
+  <section id="faq" class="py-20 lg:py-32 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12 fade-up">
+        <p class="text-gold font-medium tracking-widest uppercase text-sm mb-3">FAQ</p>
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary leading-tight mb-4">
+          Pertanyaan Umum
+        </h2>
+        <div class="section-divider mx-auto mb-6"></div>
+        <p class="text-dark/60 leading-relaxed">
+          Temukan jawaban untuk pertanyaan yang sering diajukan tentang Timor Djawa.
+        </p>
+      </div>
+
+      <div class="space-y-4" id="faqContainer">
+        <!-- FAQ 1 -->
+        <div class="faq-item bg-cream rounded-2xl overflow-hidden fade-up" style="transition-delay:0.05s">
+          <button class="faq-toggle w-full flex items-center justify-between p-5 sm:p-6 text-left">
+            <span class="font-medium text-dark text-sm sm:text-base pr-4">Apa saja metode pembayaran yang diterima?</span>
+            <i data-lucide="plus" class="w-5 h-5 text-primary flex-shrink-0 faq-icon"></i>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="text-dark/60 text-sm leading-relaxed pb-5">Kami menerima berbagai metode pembayaran termasuk kartu debit/kredit (Visa, Mastercard), e-wallet (GoPay, OVO, DANA, ShopeePay), transfer bank (BCA, Mandiri, BNI, BRI), dan tunai untuk pembelian langsung di toko.</p>
+          </div>
+        </div>
+        <!-- FAQ 2 -->
+        <div class="faq-item bg-cream rounded-2xl overflow-hidden fade-up" style="transition-delay:0.1s">
+          <button class="faq-toggle w-full flex items-center justify-between p-5 sm:p-6 text-left">
+            <span class="font-medium text-dark text-sm sm:text-base pr-4">Apakah tersedia opsi minuman non-kafein?</span>
+            <i data-lucide="plus" class="w-5 h-5 text-primary flex-shrink-0 faq-icon"></i>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="text-dark/60 text-sm leading-relaxed pb-5">Tentu! Kami menyediakan berbagai pilihan non-kafein seperti Matcha Latte, Chocolate, Earl Grey Tea, dan berbagai jus segar. Kami juga bisa menyesuaikan pesanan kopi Anda menjadi decaf sesuai ketersediaan.</p>
+          </div>
+        </div>
+        <!-- FAQ 3 -->
+        <div class="faq-item bg-cream rounded-2xl overflow-hidden fade-up" style="transition-delay:0.15s">
+          <button class="faq-toggle w-full flex items-center justify-between p-5 sm:p-6 text-left">
+            <span class="font-medium text-dark text-sm sm:text-base pr-4">Berapa lama waktu pengiriman delivery?</span>
+            <i data-lucide="plus" class="w-5 h-5 text-primary flex-shrink-0 faq-icon"></i>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="text-dark/60 text-sm leading-relaxed pb-5">Waktu pengiriman bervariasi tergantung lokasi Anda. Untuk radius 3 km dari toko, estimasi pengiriman adalah 15-30 menit. Untuk jarak yang lebih jauh, estimasi 30-60 menit. Kami selalu berusaha mengantarkan pesanan Anda dalam keadaan terbaik.</p>
+          </div>
+        </div>
+        <!-- FAQ 4 -->
+        <div class="faq-item bg-cream rounded-2xl overflow-hidden fade-up" style="transition-delay:0.2s">
+          <button class="faq-toggle w-full flex items-center justify-between p-5 sm:p-6 text-left">
+            <span class="font-medium text-dark text-sm sm:text-base pr-4">Apakah bisa request custom minuman?</span>
+            <i data-lucide="plus" class="w-5 h-5 text-primary flex-shrink-0 faq-icon"></i>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="text-dark/60 text-sm leading-relaxed pb-5">Tentu saja! Anda bisa request tingkat kemanisan, jenis susu (regular, oat, almond, soy), suhu minuman (hot/ice), dan tambahan shot espresso. Cukup tuliskan di kolom catatan saat pemesanan atau sampaikan langsung ke barista kami.</p>
+          </div>
+        </div>
+        <!-- FAQ 5 -->
+        <div class="faq-item bg-cream rounded-2xl overflow-hidden fade-up" style="transition-delay:0.25s">
+          <button class="faq-toggle w-full flex items-center justify-between p-5 sm:p-6 text-left">
+            <span class="font-medium text-dark text-sm sm:text-base pr-4">Apakah kafe ini cocok untuk bekerja / remote working?</span>
+            <i data-lucide="plus" class="w-5 h-5 text-primary flex-shrink-0 faq-icon"></i>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="text-dark/60 text-sm leading-relaxed pb-5">Sangat cocok! Kami menyediakan WiFi berkecepatan tinggi, stop kontak di setiap meja, dan suasana yang nyaman untuk bekerja. Kami juga memiliki area indoor dan outdoor yang bisa Anda pilih sesuai preferensi.</p>
+          </div>
+        </div>
+        <!-- FAQ 6 -->
+        <div class="faq-item bg-cream rounded-2xl overflow-hidden fade-up" style="transition-delay:0.3s">
+          <button class="faq-toggle w-full flex items-center justify-between p-5 sm:p-6 text-left">
+            <span class="font-medium text-dark text-sm sm:text-base pr-4">Apakah tersedia paket kopi beans untuk dibawa pulang?</span>
+            <i data-lucide="plus" class="w-5 h-5 text-primary flex-shrink-0 faq-icon"></i>
+          </button>
+          <div class="faq-answer px-5 sm:px-6">
+            <p class="text-dark/60 text-sm leading-relaxed pb-5">Ya, kami menjual biji kopi sangrai (roasted beans) dalam kemasan 200g dan 500g. Tersedia berbagai single origin dari berbagai wilayah Indonesia serta blend racikan khas Timor Djawa. Tanya tim kami untuk rekomendasi!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 11. CONTACT SECTION                          -->
+  <!-- ============================================ -->
+  <section id="kontak" class="py-20 lg:py-32 bg-cream">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto mb-12 fade-up">
+        <p class="text-gold font-medium tracking-widest uppercase text-sm mb-3">Hubungi Kami</p>
+        <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold text-primary leading-tight mb-4">
+          Kami Senang Mendengar dari Anda
+        </h2>
+        <div class="section-divider mx-auto mb-6"></div>
+        <p class="text-dark/60 leading-relaxed">
+          Punya pertanyaan, saran, atau ingin bekerja sama? Jangan ragu untuk menghubungi kami melalui form di bawah atau kontak yang tersedia.
+        </p>
+      </div>
+
+      <div class="grid lg:grid-cols-5 gap-10 lg:gap-12">
+        <!-- Contact Info -->
+        <div class="lg:col-span-2 space-y-8 fade-left">
+          <!-- Address -->
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
+              <i data-lucide="map-pin" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold text-dark text-sm mb-1">Alamat</h4>
+              <p class="text-dark/60 text-sm leading-relaxed">Jl. Kopi Nusantara No. 88, Menteng, Jakarta Pusat 10310</p>
+            </div>
+          </div>
+          <!-- Phone -->
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
+              <i data-lucide="phone" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold text-dark text-sm mb-1">Telepon</h4>
+              <p class="text-dark/60 text-sm">(021) 555-0188</p>
+            </div>
+          </div>
+          <!-- WhatsApp -->
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
+              <i data-lucide="message-circle" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold text-dark text-sm mb-1">WhatsApp</h4>
+              <p class="text-dark/60 text-sm">+62 812-3456-7890</p>
+            </div>
+          </div>
+          <!-- Email -->
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
+              <i data-lucide="mail" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold text-dark text-sm mb-1">Email</h4>
+              <p class="text-dark/60 text-sm">halo@timordjawa.co.id</p>
+            </div>
+          </div>
+          <!-- Hours -->
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
+              <i data-lucide="clock" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold text-dark text-sm mb-1">Jam Operasional</h4>
+              <p class="text-dark/60 text-sm">Senin - Jumat: 07.00 - 22.00</p>
+              <p class="text-dark/60 text-sm">Sabtu - Minggu: 08.00 - 23.00</p>
+            </div>
+          </div>
+          <!-- Social Media -->
+          <div class="flex items-start gap-4">
+            <div class="w-12 h-12 rounded-xl bg-white flex items-center justify-center flex-shrink-0 shadow-sm">
+              <i data-lucide="share-2" class="w-5 h-5 text-primary"></i>
+            </div>
+            <div>
+              <h4 class="font-semibold text-dark text-sm mb-2">Media Sosial</h4>
+              <div class="flex gap-3">
+                <a href="#" class="w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-primary hover:text-white text-dark/60 transition-all" aria-label="Instagram">
+                  <i data-lucide="instagram" class="w-4 h-4"></i>
+                </a>
+                <a href="#" class="w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-primary hover:text-white text-dark/60 transition-all" aria-label="TikTok">
+                  <i data-lucide="music" class="w-4 h-4"></i>
+                </a>
+                <a href="#" class="w-9 h-9 rounded-full bg-white shadow-sm flex items-center justify-center hover:bg-primary hover:text-white text-dark/60 transition-all" aria-label="Facebook">
+                  <i data-lucide="facebook" class="w-4 h-4"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form + Map -->
+        <div class="lg:col-span-3 space-y-8 fade-right">
+          <!-- Google Maps Embed -->
+          <div class="rounded-2xl overflow-hidden shadow-sm h-[250px]">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.2904207485697!2d106.8400233!3d-6.1973272!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTEnMzAuNCJTIDEwNsKwNTAnMjQuMSJF!5e0!3m2!1sid!2sid!4v1700000000000!5m2!1sid!2sid"
+              width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+              title="Lokasi Timor Djawa">
+            </iframe>
+          </div>
+
+          <!-- Contact Form -->
+          <form id="contactForm" class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm">
+            <h3 class="font-heading text-xl font-bold text-primary mb-6">Kirim Pesan</h3>
+            <div class="grid sm:grid-cols-2 gap-4 mb-4">
+              <div>
+                <label for="contactName" class="text-sm font-medium text-dark block mb-2">Nama</label>
+                <input type="text" id="contactName" placeholder="Nama lengkap Anda" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all text-sm" required />
+              </div>
+              <div>
+                <label for="contactEmail" class="text-sm font-medium text-dark block mb-2">Email</label>
+                <input type="email" id="contactEmail" placeholder="email@contoh.com" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all text-sm" required />
+              </div>
+            </div>
+            <div class="mb-4">
+              <label for="contactPhone" class="text-sm font-medium text-dark block mb-2">Nomor HP</label>
+              <input type="tel" id="contactPhone" placeholder="+62 8xx-xxxx-xxxx" class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all text-sm" required />
+            </div>
+            <div class="mb-6">
+              <label for="contactMessage" class="text-sm font-medium text-dark block mb-2">Pesan</label>
+              <textarea id="contactMessage" rows="4" placeholder="Tulis pesan Anda di sini..." class="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-gold focus:ring-2 focus:ring-gold/20 outline-none transition-all text-sm resize-none" required></textarea>
+            </div>
+            <button type="submit" class="btn-primary w-full py-3.5 rounded-full font-medium text-base flex items-center justify-center gap-2">
+              <i data-lucide="send" class="w-5 h-5"></i>
+              Kirim Pesan
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- 12. FOOTER                                   -->
+  <!-- ============================================ -->
+  <footer class="bg-primary pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <!-- Brand -->
+        <div class="sm:col-span-2 lg:col-span-1">
+          <a href="#beranda" class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
+              <span class="text-white font-heading font-bold text-lg">T</span>
+            </div>
+            <span class="font-heading text-xl font-semibold text-white">Timor Djawa</span>
+          </a>
+          <p class="text-white/40 text-sm leading-relaxed mb-6">Kopi berkualitas premium dari biji kopi terbaik Indonesia. Setiap cangkir adalah perjalanan rasa yang tak terlupakan.</p>
+          <div class="flex gap-3">
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold text-white/60 hover:text-white transition-all" aria-label="Instagram">
+              <i data-lucide="instagram" class="w-4 h-4"></i>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold text-white/60 hover:text-white transition-all" aria-label="TikTok">
+              <i data-lucide="music" class="w-4 h-4"></i>
+            </a>
+            <a href="#" class="w-9 h-9 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold text-white/60 hover:text-white transition-all" aria-label="Facebook">
+              <i data-lucide="facebook" class="w-4 h-4"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick Links -->
+        <div>
+          <h4 class="font-heading text-lg font-semibold text-white mb-4">Navigasi</h4>
+          <ul class="space-y-3">
+            <li><a href="#beranda" class="text-white/40 text-sm hover:text-gold transition-colors">Beranda</a></li>
+            <li><a href="#tentang" class="text-white/40 text-sm hover:text-gold transition-colors">Tentang Kami</a></li>
+            <li><a href="#menu" class="text-white/40 text-sm hover:text-gold transition-colors">Menu</a></li>
+            <li><a href="#order" class="text-white/40 text-sm hover:text-gold transition-colors">Pesan Online</a></li>
+            <li><a href="#galeri" class="text-white/40 text-sm hover:text-gold transition-colors">Galeri</a></li>
+            <li><a href="#kontak" class="text-white/40 text-sm hover:text-gold transition-colors">Kontak</a></li>
+          </ul>
+        </div>
+
+        <!-- Hours -->
+        <div>
+          <h4 class="font-heading text-lg font-semibold text-white mb-4">Jam Buka</h4>
+          <ul class="space-y-3">
+            <li class="flex justify-between text-sm">
+              <span class="text-white/40">Senin - Jumat</span>
+              <span class="text-white/70">07.00 - 22.00</span>
+            </li>
+            <li class="flex justify-between text-sm">
+              <span class="text-white/40">Sabtu</span>
+              <span class="text-white/70">08.00 - 23.00</span>
+            </li>
+            <li class="flex justify-between text-sm">
+              <span class="text-white/40">Minggu</span>
+              <span class="text-white/70">08.00 - 23.00</span>
+            </li>
+          </ul>
+          <div class="mt-4">
+            <span class="inline-flex items-center gap-2 text-sm text-gold font-medium">
+              <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+              Buka Sekarang
+            </span>
+          </div>
+        </div>
+
+        <!-- Contact -->
+        <div>
+          <h4 class="font-heading text-lg font-semibold text-white mb-4">Kontak</h4>
+          <ul class="space-y-3">
+            <li class="flex items-start gap-2">
+              <i data-lucide="map-pin" class="w-4 h-4 text-gold mt-0.5 flex-shrink-0"></i>
+              <span class="text-white/40 text-sm">Jl. Kopi Nusantara No. 88, Menteng, Jakarta Pusat</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="phone" class="w-4 h-4 text-gold flex-shrink-0"></i>
+              <span class="text-white/40 text-sm">(021) 555-0188</span>
+            </li>
+            <li class="flex items-center gap-2">
+              <i data-lucide="mail" class="w-4 h-4 text-gold flex-shrink-0"></i>
+              <span class="text-white/40 text-sm">halo@timordjawa.co.id</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="text-white/30 text-sm">&copy; 2026 Timor Djawa. Seluruh hak cipta dilindungi.</p>
+        <p class="text-white/20 text-xs">Dibuat dengan cinta untuk kopi Indonesia.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- BACK TO TOP BUTTON                           -->
+  <!-- ============================================ -->
+  <button id="backToTop" class="back-to-top fixed bottom-6 right-6 z-50 w-12 h-12 rounded-full bg-primary text-white shadow-lg flex items-center justify-center hover:bg-gold transition-all duration-300" aria-label="Kembali ke atas">
+    <i data-lucide="chevron-up" class="w-5 h-5"></i>
+  </button>
+
+  <!-- ============================================ -->
+  <!-- TOAST NOTIFICATION                           -->
+  <!-- ============================================ -->
+  <div id="toast" class="fixed bottom-20 right-6 z-[90] bg-primary text-white px-6 py-3 rounded-xl shadow-lg transform translate-y-4 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-2 text-sm font-medium">
+    <i data-lucide="check-circle" class="w-4 h-4 text-gold"></i>
+    <span id="toastMessage">Item ditambahkan ke keranjang</span>
+  </div>
+
+
+  <!-- ============================================ -->
+  <!-- JAVASCRIPT                                   -->
+  <!-- ============================================ -->
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    // ========================================
+    // MENU DATA
+    // ========================================
+    const menuItems = [
+      { id: 1,  name: 'Espresso Timor',     category: 'coffee',       price: 32000, rating: 4.9, img: 'https://images.unsplash.com/photo-1510707577719-ae7c14805e3a?w=500&h=500&fit=crop&q=80',  desc: 'Espresso premium dari biji kopi Timor',         badge: 'Favorit' },
+      { id: 2,  name: 'Americano',           category: 'coffee',       price: 28000, rating: 4.7, img: 'https://images.unsplash.com/photo-1551030173-122aabc4489c?w=500&h=500&fit=crop&q=80',  desc: 'Espresso dengan air panas yang menyegarkan',    badge: '' },
+      { id: 3,  name: 'Cappuccino',          category: 'coffee',       price: 38000, rating: 4.8, img: 'https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=500&h=500&fit=crop&q=80',  desc: 'Espresso, steamed milk, dan foam lembut',       badge: '' },
+      { id: 4,  name: 'Caramel Macchiato',   category: 'coffee',       price: 45000, rating: 4.9, img: 'https://images.unsplash.com/photo-1534778101976-62847782c213?w=500&h=500&fit=crop&q=80',  desc: 'Espresso, vanilla, susu, dan caramel drizzle',  badge: 'Favorit' },
+      { id: 5,  name: 'Kopi Susu Gula Aren', category: 'coffee',       price: 38000, rating: 5.0, img: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?w=500&h=500&fit=crop&q=80',  desc: 'Espresso, fresh milk, dan gula aren asli',       badge: 'Best Seller' },
+      { id: 6,  name: 'Mocha',               category: 'coffee',       price: 42000, rating: 4.7, img: 'https://images.unsplash.com/photo-1578314675249-a6910f80cc4e?w=500&h=500&fit=crop&q=80',  desc: 'Perpaduan espresso dan cokelat Belgia',          badge: '' },
+      { id: 7,  name: 'Matcha Latte',        category: 'non-coffee',   price: 40000, rating: 4.8, img: 'https://images.unsplash.com/photo-1515823064-d6e0c04616a7?w=500&h=500&fit=crop&q=80',  desc: 'Matcha premium Jepang dengan susu segar',        badge: 'Favorit' },
+      { id: 8,  name: 'Chocolate Bliss',     category: 'non-coffee',   price: 38000, rating: 4.6, img: 'https://images.unsplash.com/photo-1542990253-0d0f5be5f0ed?w=500&h=500&fit=crop&q=80',  desc: 'Cokelat Belgia hangat dengan whipped cream',     badge: '' },
+      { id: 9,  name: 'Earl Grey Tea',       category: 'tea',          price: 30000, rating: 4.5, img: 'https://images.unsplash.com/photo-1556679343-c7306c1976bc?w=500&h=500&fit=crop&q=80',  desc: 'Teh Earl Grey dengan aroma bergamot klasik',     badge: '' },
+      { id: 10, name: 'Green Tea Latte',     category: 'tea',          price: 35000, rating: 4.6, img: 'https://images.unsplash.com/photo-1536256263959-770b48d82b0a?w=500&h=500&fit=crop&q=80',  desc: 'Green tea Jepang creamy dan menyegarkan',       badge: '' },
+      { id: 11, name: 'Timor Signature',     category: 'signature',    price: 52000, rating: 5.0, img: 'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=500&h=500&fit=crop&q=80',  desc: 'Racikan rahasia khas Timor Djawa',               badge: 'Signature' },
+      { id: 12, name: 'Affogato Royal',      category: 'signature',    price: 48000, rating: 4.9, img: 'https://images.unsplash.com/photo-1567312309372-2e62a698e3ea?w=500&h=500&fit=crop&q=80',  desc: 'Espresso atas gelato vanilla premium',          badge: 'Signature' },
+      { id: 13, name: 'Tiramisu',            category: 'dessert',      price: 42000, rating: 4.8, img: 'https://images.unsplash.com/photo-1551024506-0bccd828d307?w=500&h=500&fit=crop&q=80',  desc: 'Dessert klasik Italia dengan espresso',          badge: 'Favorit' },
+      { id: 14, name: 'Croissant Butter',    category: 'snack',        price: 28000, rating: 4.6, img: 'https://images.unsplash.com/photo-1555507036-ab1f4038024a?w=500&h=500&fit=crop&q=80',  desc: 'Croissant mentega renyah dipanggang segar',     badge: '' },
+      { id: 15, name: 'Cookies & Cream',     category: 'dessert',      price: 32000, rating: 4.5, img: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=500&h=500&fit=crop&q=80',  desc: 'Cookies cokelat chip dengan es krim vanilla',    badge: '' },
+      { id: 16, name: 'Banana Bread',        category: 'snack',        price: 25000, rating: 4.4, img: 'https://images.unsplash.com/photo-1585023945930-76aca99c8e7f?w=500&h=500&fit=crop&q=80',  desc: 'Banana bread homemade yang lembut dan harum',   badge: '' },
+    ];
+
+    // ========================================
+    // RENDER MENU CARDS (Featured Section)
+    // ========================================
+    const menuGrid = document.getElementById('menuGrid');
+
+    function renderStars(rating) {
+      const full = Math.floor(rating);
+      const half = rating % 1 >= 0.5 ? 1 : 0;
+      let html = '';
+      for (let i = 0; i < full; i++) html += '<i data-lucide="star" class="w-3.5 h-3.5 fill-gold text-gold"></i>';
+      if (half) html += '<i data-lucide="star" class="w-3.5 h-3.5 fill-gold/50 text-gold"></i>';
+      html += `<span class="text-xs text-dark/50 ml-1">${rating}</span>`;
+      return html;
+    }
+
+    function renderMenuCards(items) {
+      menuGrid.innerHTML = items.map((item, i) => `
+        <div class="menu-card bg-white rounded-2xl overflow-hidden shadow-sm fade-up" data-category="${item.category}" style="transition-delay: ${i * 0.05}s">
+          <div class="relative img-zoom">
+            <img src="${item.img}" alt="${item.name}" class="w-full h-52 object-cover" loading="lazy" />
+            ${item.badge ? `<span class="absolute top-3 left-3 px-3 py-1 rounded-full ${item.badge === 'Best Seller' || item.badge === 'Signature' ? 'bg-primary text-white' : 'bg-gold text-white'} text-xs font-medium">${item.badge}</span>` : ''}
+            <button class="fav-btn absolute top-3 right-3 w-8 h-8 rounded-full bg-white/80 backdrop-blur-sm flex items-center justify-center hover:bg-gold hover:text-white text-dark/60 transition-all" aria-label="Favorit">
+              <i data-lucide="heart" class="w-4 h-4"></i>
+            </button>
+          </div>
+          <div class="p-5">
+            <div class="flex items-center gap-1 mb-2">
+              ${renderStars(item.rating)}
+            </div>
+            <h3 class="font-heading text-lg font-bold text-primary mb-1">${item.name}</h3>
+            <p class="text-dark/50 text-xs leading-relaxed mb-4">${item.desc}</p>
+            <div class="flex items-center justify-between">
+              <span class="font-heading text-xl font-bold text-primary">Rp ${item.price.toLocaleString('id-ID')}</span>
+              <button class="btn-primary w-10 h-10 rounded-full flex items-center justify-center p-0 add-to-cart-btn" data-name="${item.name}" data-price="${item.price}" data-img="${item.img}">
+                <i data-lucide="plus" class="w-4 h-4"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+      observeFadeElements();
+      attachCartButtons();
+      attachFavButtons();
+    }
+
+    renderMenuCards(menuItems);
+
+    // Category filter for Featured Menu
+    const catBtns = document.querySelectorAll('.cat-btn');
+    catBtns.forEach(btn => {
+      btn.addEventListener('click', function() {
+        catBtns.forEach(b => b.classList.remove('active'));
+        this.classList.add('active');
+        const cat = this.dataset.category;
+        const filtered = cat === 'semua' ? menuItems : menuItems.filter(item => item.category === cat);
+        renderMenuCards(filtered);
+      });
+    });
+
+    // ========================================
+    // RENDER ORDER MENU CARDS
+    // ========================================
+    const orderMenuGrid = document.getElementById('orderMenuGrid');
+    const orderSearch = document.getElementById('orderSearch');
+    const orderCategoryFilter = document.getElementById('orderCategoryFilter');
+
+    function renderOrderCards(items) {
+      if (items.length === 0) {
+        orderMenuGrid.innerHTML = '<div class="col-span-full text-center py-12 text-dark/30 text-sm">Tidak ada menu ditemukan</div>';
+        return;
+      }
+      orderMenuGrid.innerHTML = items.map(item => `
+        <div class="bg-white rounded-xl p-4 shadow-sm flex gap-4 items-center order-item" data-id="${item.id}" data-category="${item.category}" data-name="${item.name}">
+          <img src="${item.img}" alt="${item.name}" class="w-16 h-16 rounded-xl object-cover flex-shrink-0" loading="lazy" />
+          <div class="flex-1 min-w-0">
+            <h4 class="font-medium text-dark text-sm truncate">${item.name}</h4>
+            <p class="text-gold font-heading font-bold text-sm">Rp ${item.price.toLocaleString('id-ID')}</p>
+          </div>
+          <div class="flex items-center gap-2 flex-shrink-0">
+            <button class="qty-btn w-7 h-7 rounded-lg border border-gray-200 flex items-center justify-center text-dark/60 order-minus" aria-label="Kurangi">
+              <i data-lucide="minus" class="w-3 h-3"></i>
+            </button>
+            <span class="order-qty w-6 text-center text-sm font-medium text-dark">0</span>
+            <button class="qty-btn w-7 h-7 rounded-lg border border-gray-200 flex items-center justify-center text-dark/60 order-plus" aria-label="Tambah">
+              <i data-lucide="plus" class="w-3 h-3"></i>
+            </button>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+      attachOrderQtyButtons();
+    }
+
+    function filterOrderMenu() {
+      const search = orderSearch.value.toLowerCase();
+      const cat = orderCategoryFilter.value;
+      let filtered = menuItems;
+      if (cat !== 'semua') filtered = filtered.filter(item => item.category === cat);
+      if (search) filtered = filtered.filter(item => item.name.toLowerCase().includes(search));
+      renderOrderCards(filtered);
+    }
+
+    orderSearch.addEventListener('input', filterOrderMenu);
+    orderCategoryFilter.addEventListener('change', filterOrderMenu);
+    renderOrderCards(menuItems);
+
+    // ========================================
+    // SHOPPING CART
+    // ========================================
+    let cart = [];
+    let discount = 0;
+
+    function updateCartUI() {
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+
+      // Cart badges
+      const badges = [document.getElementById('cartCountDesktop'), document.getElementById('cartCountMobile')];
+      badges.forEach(badge => {
+        if (totalCount > 0) {
+          badge.textContent = totalCount;
+          badge.classList.remove('hidden');
+          badge.classList.add('cart-badge-pulse');
+          setTimeout(() => badge.classList.remove('cart-badge-pulse'), 400);
+        } else {
+          badge.classList.add('hidden');
+        }
+      });
+
+      // Cart sidebar list
+      const cartList = document.getElementById('cartList');
+      const cartEmpty = document.getElementById('cartEmpty');
+      const cartFooter = document.getElementById('cartFooter');
+
+      if (cart.length === 0) {
+        cartList.classList.add('hidden');
+        cartEmpty.classList.remove('hidden');
+        cartFooter.classList.add('hidden');
+      } else {
+        cartEmpty.classList.add('hidden');
+        cartList.classList.remove('hidden');
+        cartFooter.classList.remove('hidden');
+
+        cartList.innerHTML = cart.map(item => `
+          <div class="flex gap-3 items-center py-3 border-b border-gray-50 last:border-0" data-id="${item.id}">
+            <img src="${item.img}" alt="${item.name}" class="w-14 h-14 rounded-xl object-cover flex-shrink-0" />
+            <div class="flex-1 min-w-0">
+              <h4 class="font-medium text-dark text-sm truncate">${item.name}</h4>
+              <p class="text-gold font-heading font-bold text-sm">Rp ${item.price.toLocaleString('id-ID')}</p>
+              <div class="flex items-center gap-2 mt-1">
+                <button class="cart-qty-btn w-6 h-6 rounded border border-gray-200 flex items-center justify-center text-xs text-dark/60 cart-minus" data-id="${item.id}">
+                  <i data-lucide="minus" class="w-3 h-3"></i>
+                </button>
+                <span class="text-sm font-medium">${item.qty}</span>
+                <button class="cart-qty-btn w-6 h-6 rounded border border-gray-200 flex items-center justify-center text-xs text-dark/60 cart-plus" data-id="${item.id}">
+                  <i data-lucide="plus" class="w-3 h-3"></i>
+                </button>
+              </div>
+            </div>
+            <button class="cart-remove p-1 text-dark/30 hover:text-red-500 transition-colors" data-id="${item.id}" aria-label="Hapus">
+              <i data-lucide="trash-2" class="w-4 h-4"></i>
+            </button>
+          </div>
+        `).join('');
+
+        document.getElementById('cartTotal').textContent = `Rp ${totalPrice.toLocaleString('id-ID')}`;
+
+        // Re-attach cart qty buttons
+        cartList.querySelectorAll('.cart-minus').forEach(btn => {
+          btn.addEventListener('click', () => updateCartItem(parseInt(btn.dataset.id), -1));
+        });
+        cartList.querySelectorAll('.cart-plus').forEach(btn => {
+          btn.addEventListener('click', () => updateCartItem(parseInt(btn.dataset.id), 1));
+        });
+        cartList.querySelectorAll('.cart-remove').forEach(btn => {
+          btn.addEventListener('click', () => removeFromCart(parseInt(btn.dataset.id)));
+        });
+
+        lucide.createIcons();
+      }
+
+      // Update order summary
+      updateOrderSummary();
+    }
+
+    function addToCart(name, price, img) {
+      const existing = cart.find(item => item.name === name);
+      if (existing) {
+        existing.qty++;
+      } else {
+        cart.push({ id: Date.now(), name, price, img, qty: 1 });
+      }
+      updateCartUI();
+      showToast(`${name} ditambahkan ke keranjang`);
+
+      // Also update order section qty
+      syncOrderQty();
+    }
+
+    function updateCartItem(id, delta) {
+      const item = cart.find(i => i.id === id);
+      if (item) {
+        item.qty += delta;
+        if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+      }
+      updateCartUI();
+      syncOrderQty();
+    }
+
+    function removeFromCart(id) {
+      cart = cart.filter(i => i.id !== id);
+      updateCartUI();
+      syncOrderQty();
+    }
+
+    // Attach "add to cart" buttons
+    function attachCartButtons() {
+      document.querySelectorAll('.add-to-cart-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          addToCart(this.dataset.name, parseInt(this.dataset.price), this.dataset.img);
+        });
+      });
+    }
+    attachCartButtons();
+
+    // Favorite buttons
+    function attachFavButtons() {
+      document.querySelectorAll('.fav-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          this.classList.toggle('bg-gold');
+          this.classList.toggle('text-white');
+          this.classList.toggle('bg-white/80');
+          this.classList.toggle('text-dark/60');
+        });
+      });
+    }
+    attachFavButtons();
+
+    // ========================================
+    // ORDER SECTION QUANTITY
+    // ========================================
+    function attachOrderQtyButtons() {
+      document.querySelectorAll('.order-plus').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const el = this.closest('.order-item');
+          const qtyEl = el.querySelector('.order-qty');
+          const name = el.dataset.name;
+          const price = menuItems.find(m => m.name === name).price;
+          const img = menuItems.find(m => m.name === name).img;
+          let qty = parseInt(qtyEl.textContent);
+          qty++;
+          qtyEl.textContent = qty;
+
+          const existing = cart.find(item => item.name === name);
+          if (existing) {
+            existing.qty = qty;
+          } else {
+            cart.push({ id: Date.now() + Math.random(), name, price, img, qty });
+          }
+          updateCartUI();
+        });
+      });
+      document.querySelectorAll('.order-minus').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const el = this.closest('.order-item');
+          const qtyEl = el.querySelector('.order-qty');
+          const name = el.dataset.name;
+          let qty = parseInt(qtyEl.textContent);
+          if (qty > 0) {
+            qty--;
+            qtyEl.textContent = qty;
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+              existing.qty = qty;
+              if (qty <= 0) cart = cart.filter(i => i.name !== name);
+            }
+            updateCartUI();
+          }
+        });
+      });
+    }
+
+    function syncOrderQty() {
+      document.querySelectorAll('.order-item').forEach(el => {
+        const name = el.dataset.name;
+        const qtyEl = el.querySelector('.order-qty');
+        const inCart = cart.find(i => i.name === name);
+        qtyEl.textContent = inCart ? inCart.qty : 0;
+      });
+    }
+
+    // ========================================
+    // ORDER SUMMARY
+    // ========================================
+    function updateOrderSummary() {
+      const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+      const tax = Math.round(subtotal * 0.1);
+      const discountAmount = Math.round(subtotal * discount);
+      const total = subtotal + tax - discountAmount;
+
+      document.getElementById('orderSubtotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+      document.getElementById('orderTax').textContent = `Rp ${tax.toLocaleString('id-ID')}`;
+      document.getElementById('orderTotal').textContent = `Rp ${total.toLocaleString('id-ID')}`;
+
+      const discountRow = document.getElementById('discountRow');
+      if (discount > 0) {
+        discountRow.classList.remove('hidden');
+        discountRow.classList.add('flex');
+        document.getElementById('orderDiscount').textContent = `-Rp ${discountAmount.toLocaleString('id-ID')}`;
+      } else {
+        discountRow.classList.add('hidden');
+        discountRow.classList.remove('flex');
+      }
+
+      // Order summary items
+      const summaryEl = document.getElementById('orderSummaryItems');
+      const emptyMsg = document.getElementById('orderEmptyMsg');
+      if (cart.length === 0) {
+        summaryEl.innerHTML = '<p id="orderEmptyMsg" class="text-gray-300 text-sm text-center py-4">Belum ada item</p>';
+      } else {
+        summaryEl.innerHTML = cart.map(item => `
+          <div class="flex justify-between items-center text-sm">
+            <span class="text-dark/70">${item.name} <span class="text-dark/40">x${item.qty}</span></span>
+            <span class="text-dark font-medium">Rp ${(item.price * item.qty).toLocaleString('id-ID')}</span>
+          </div>
+        `).join('');
+      }
+    }
+
+    // Promo code
+    document.getElementById('applyPromo').addEventListener('click', function() {
+      const code = document.getElementById('promoCode').value.trim().toUpperCase();
+      if (code === 'KOPI20') {
+        discount = 0.2;
+        showToast('Kode promo KOPI20 berhasil! Diskon 20%');
+      } else if (code === 'TIMOR10') {
+        discount = 0.1;
+        showToast('Kode promo TIMOR10 berhasil! Diskon 10%');
+      } else {
+        discount = 0;
+        showToast('Kode promo tidak valid');
+      }
+      updateOrderSummary();
+    });
+
+    // Checkout
+    document.getElementById('checkoutBtn').addEventListener('click', function() {
+      if (cart.length === 0) {
+        showToast('Keranjang masih kosong');
+        return;
+      }
+      const notes = document.getElementById('customerNotes').value;
+      const delivery = document.querySelector('input[name="delivery"]:checked').value;
+      showToast('Pesanan berhasil dibuat! Terima kasih.');
+      cart = [];
+      discount = 0;
+      document.getElementById('customerNotes').value = '';
+      document.getElementById('promoCode').value = '';
+      updateCartUI();
+      syncOrderQty();
+    });
+
+    // ========================================
+    // CART SIDEBAR TOGGLE
+    // ========================================
+    const cartSidebar = document.getElementById('cartSidebar');
+    const cartOverlay = document.getElementById('cartOverlay');
+
+    function openCart() {
+      cartOverlay.classList.remove('hidden');
+      requestAnimationFrame(() => {
+        cartOverlay.style.opacity = '1';
+        cartSidebar.style.transform = 'translateX(0)';
+      });
+    }
+    function closeCart() {
+      cartOverlay.style.opacity = '0';
+      cartSidebar.style.transform = 'translateX(100%)';
+      setTimeout(() => cartOverlay.classList.add('hidden'), 400);
+    }
+
+    document.getElementById('cartToggleDesktop').addEventListener('click', openCart);
+    document.getElementById('cartToggleMobile').addEventListener('click', function(e) {
+      e.preventDefault();
+      closeMobileMenu();
+      openCart();
+    });
+    document.getElementById('cartClose').addEventListener('click', closeCart);
+    cartOverlay.addEventListener('click', closeCart);
+    document.getElementById('cartCheckoutBtn').addEventListener('click', function(e) {
+      e.preventDefault();
+      closeCart();
+      document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // ========================================
+    // MOBILE MENU
+    // ========================================
+    const mobileMenu = document.getElementById('mobileMenu');
+
+    function openMobileMenu() {
+      mobileMenu.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeMobileMenu() {
+      mobileMenu.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('mobileMenuBtn').addEventListener('click', openMobileMenu);
+    document.getElementById('mobileMenuClose').addEventListener('click', closeMobileMenu);
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+
+    // ========================================
+    // STICKY NAVBAR
+    // ========================================
+    const navbar = document.getElementById('navbar');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', function() {
+      const currentScroll = window.pageYOffset;
+      if (currentScroll > 50) {
+        navbar.classList.add('navbar-scrolled');
+      } else {
+        navbar.classList.remove('navbar-scrolled');
+      }
+      lastScroll = currentScroll;
+    });
+
+    // ========================================
+    // BACK TO TOP
+    // ========================================
+    const backToTop = document.getElementById('backToTop');
+
+    window.addEventListener('scroll', function() {
+      if (window.pageYOffset > 600) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    });
+
+    backToTop.addEventListener('click', function() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // ========================================
+    // FAQ ACCORDION
+    // ========================================
+    document.querySelectorAll('.faq-toggle').forEach(toggle => {
+      toggle.addEventListener('click', function() {
+        const answer = this.nextElementSibling;
+        const icon = this.querySelector('.faq-icon');
+        const isOpen = answer.classList.contains('open');
+
+        // Close all
+        document.querySelectorAll('.faq-answer').forEach(a => a.classList.remove('open'));
+        document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('open'));
+
+        // Toggle current
+        if (!isOpen) {
+          answer.classList.add('open');
+          icon.classList.add('open');
+        }
+      });
+    });
+
+    // ========================================
+    // SCROLL ANIMATIONS (Intersection Observer)
+    // ========================================
+    function observeFadeElements() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+      document.querySelectorAll('.fade-up, .fade-left, .fade-right').forEach(el => {
+        if (!el.classList.contains('visible')) {
+          observer.observe(el);
+        }
+      });
+    }
+    observeFadeElements();
+
+    // ========================================
+    // TOAST NOTIFICATION
+    // ========================================
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toastMessage');
+      toastMsg.textContent = message;
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateY(0)';
+      toast.style.pointerEvents = 'auto';
+      clearTimeout(toast._timeout);
+      toast._timeout = setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateY(4px)';
+        toast.style.pointerEvents = 'none';
+      }, 2500);
+    }
+
+    // ========================================
+    // CONTACT FORM
+    // ========================================
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('contactName').value;
+      showToast(`Terima kasih, ${name}! Pesan Anda telah terkirim.`);
+      this.reset();
+    });
+
+  }); // end DOMContentLoaded
+  </script>
+
+</body>
+</html>
